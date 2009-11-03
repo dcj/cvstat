@@ -10,6 +10,8 @@
 #include <QtCore/QList>
 #include <QtCore/QSettings>
 #include <QtCore/QProcess>
+#include <QtGui/QFileDialog>
+#include <QtCore/QTextStream>
 #include "queryextoolsdialog.h"
 
 MainFrame::MainFrame(QWidget *parent, Qt::WFlags flags)
@@ -36,6 +38,7 @@ MainFrame::MainFrame(QWidget *parent, Qt::WFlags flags)
 	connect(ui.action_Update_Stat, SIGNAL(triggered(bool)), this, SLOT(OnUpdateStat(bool)));
 	connect(ui.action_Remove_Stat, SIGNAL(triggered(bool)), this, SLOT(OnRemoveStat(bool)));
 	connect(ui.action_View, SIGNAL(triggered(bool)), this, SLOT(OnViewFile(bool)));
+	connect(ui.action_Export, SIGNAL(triggered(bool)), this, SLOT(OnToolsExport(bool)));
 
 	connect(wCvsRoots, SIGNAL(itemClicked(QListWidgetItem*)),
 			this, SLOT(OnCvsRootClicked(QListWidgetItem*)));
@@ -167,6 +170,36 @@ void MainFrame::OnViewFile(bool /*checked*/)
 
 void MainFrame::OnViewDiff(bool /*checked*/)
 {
+}
+
+void MainFrame::OnToolsExport(bool /*checked*/)
+{
+	QSqlQueryModel * model = dynamic_cast<QSqlQueryModel*>(wResultGird->model());
+	if (!model)
+		return;
+
+	QFileDialog dlg(this, tr("Select Export File"));
+	dlg.setAcceptMode(QFileDialog::AcceptSave);
+	if (dlg.exec())
+	{
+		QString fname = dlg.selectedFiles().at(0);
+		QFile file(fname);
+		if (file.open(QFile::WriteOnly | QFile::Truncate))
+		{
+			QTextStream fout(&file);
+			for(int row = 0; row < model->rowCount(); row++)
+			{
+				for(int col = 0; col < model->columnCount(); col++)
+				{
+					QVariant field = model->index(row, col).data();
+					if (col == 0)
+						fout << field.toString();
+					else
+						fout << ',' << field.toString();
+				}
+			}
+		}
+	}
 }
 
 void MainFrame::OnCvsRootClicked(QListWidgetItem* item)
