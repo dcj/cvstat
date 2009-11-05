@@ -11,7 +11,8 @@ HEADERS += cvstat.h \
     mainframe.h \
     newwizard.h \
     waitupdatedialog.h \
-    queryextoolsdialog.h
+    queryextoolsdialog.h \
+    sqlhighlighter.h
 FORMS += mainframe.ui \
     newwizard.ui \
     waitupdatedialog.ui \
@@ -21,6 +22,7 @@ SOURCES += cvstat.cpp \
     mainframe.cpp \
     newwizard.cpp \
     waitupdatedialog.cpp \
-    queryextoolsdialog.cpp
+    queryextoolsdialog.cpp \
+    sqlhighlighter.cpp
 RESOURCES += mainframe.qrc
 QT += sql
