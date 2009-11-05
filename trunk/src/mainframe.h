@@ -32,6 +32,7 @@ protected slots:
 	void OnViewFile(bool checked);
 	void OnViewDiff(bool checked);
 	void OnToolsExport(bool checked);
+	void OnToolsReport(bool checked);
 	void OnCvsRootClicked(QListWidgetItem*);
 	
 protected:

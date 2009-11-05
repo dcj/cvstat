@@ -14,6 +14,7 @@
 #include <QtCore/QTextStream>
 #include "queryextoolsdialog.h"
 #include "sqlhighlighter.h"
+#include "queryreportdialog.h"
 
 MainFrame::MainFrame(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags), m_stat(NULL)
@@ -44,6 +45,7 @@ MainFrame::MainFrame(QWidget *parent, Qt::WFlags flags)
 	connect(ui.action_Remove_Stat, SIGNAL(triggered(bool)), this, SLOT(OnRemoveStat(bool)));
 	connect(ui.action_View, SIGNAL(triggered(bool)), this, SLOT(OnViewFile(bool)));
 	connect(ui.action_Export, SIGNAL(triggered(bool)), this, SLOT(OnToolsExport(bool)));
+	connect(ui.action_Report, SIGNAL(triggered(bool)), this, SLOT(OnToolsReport(bool)));
 
 	connect(wCvsRoots, SIGNAL(itemClicked(QListWidgetItem*)),
 			this, SLOT(OnCvsRootClicked(QListWidgetItem*)));
@@ -215,6 +217,12 @@ void MainFrame::OnToolsExport(bool /*checked*/)
 			}
 		}
 	}
+}
+
+void MainFrame::OnToolsReport(bool checked)
+{
+	QueryReportDialog dlg(getCurrentCvsRoot(), m_stat, this);
+	dlg.exec();
 }
 
 void MainFrame::OnCvsRootClicked(QListWidgetItem* item)
