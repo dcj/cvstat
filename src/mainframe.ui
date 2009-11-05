@@ -45,6 +45,7 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="action_Export"/>
+    <addaction name="action_Report"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Edit"/>
@@ -110,6 +111,11 @@
   <action name="action_Export">
    <property name="text">
     <string>&amp;Export...</string>
+   </property>
+  </action>
+  <action name="action_Report">
+   <property name="text">
+    <string>Report...</string>
    </property>
   </action>
  </widget>
