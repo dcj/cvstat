@@ -13,17 +13,22 @@
 #include <QtGui/QFileDialog>
 #include <QtCore/QTextStream>
 #include "queryextoolsdialog.h"
+#include "sqlhighlighter.h"
 
 MainFrame::MainFrame(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags), m_stat(NULL)
 {
 	ui.setupUi(this);
 
+
 	hsp = new QSplitter(Qt::Horizontal, this);
 	vsp = new QSplitter(Qt::Vertical, hsp);
 	wCvsRoots = new QListWidget(hsp);
 	wResultGird = new QTableView(vsp);
 	wCmdEdit = new QTextEdit(vsp);
+
+	SqlHighlighter * highlighter = new SqlHighlighter(wCmdEdit);
+
 
 	vsp->addWidget(wCvsRoots);
 	vsp->addWidget(wCmdEdit);
@@ -187,16 +192,26 @@ void MainFrame::OnToolsExport(bool /*checked*/)
 		if (file.open(QFile::WriteOnly | QFile::Truncate))
 		{
 			QTextStream fout(&file);
+			for(int col = 0; col < model->columnCount(); col++)
+			{
+				QVariant field = model->headerData(col, Qt::Horizontal);
+				if (col == 0)
+					fout << "\"" << field.toString() << "\"";
+				else
+					fout << ',' << "\"" << field.toString() << "\"";
+			}
+			fout << "\n";
 			for(int row = 0; row < model->rowCount(); row++)
 			{
 				for(int col = 0; col < model->columnCount(); col++)
 				{
 					QVariant field = model->index(row, col).data();
 					if (col == 0)
-						fout << field.toString();
+						fout << "\"" << field.toString() << "\"";
 					else
-						fout << ',' << field.toString();
+						fout << ',' << "\"" << field.toString() << "\"";
 				}
+				fout << "\n";
 			}
 		}
 	}

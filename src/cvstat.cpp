@@ -231,5 +231,5 @@ QString CVStat::makeTableName( const QString & cvsroot ) const
 QSqlQuery CVStat::getQuery( const QString & cvsroot, const QString & sql )
 {
 	QString s = sql;
-	return QSqlQuery(s.replace("DATA", makeTableName(cvsroot)), m_db);
+	return QSqlQuery(s.replace("DATA", makeTableName(cvsroot), Qt::CaseInsensitive), m_db);
 }
