@@ -12,9 +12,44 @@
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtCore/QChar>
+#include <QtSql/QSqlDriver>
 #include "waitupdatedialog.h"
 
+/*
+#include "sqlite3.h"
+Q_DECLARE_METATYPE(sqlite3*)
 
+static int get_version(const char * v, int * start, int max)
+{
+	if (v[*start] == 0)
+		return -1;
+
+	int s = *start;
+	int e = s;
+	while(e < max && v[e] != '.')
+		e++;
+	*start = v[e] == 0 ? e : e + 1;
+	return atoi(v + s);
+}
+
+static int dotversion_comparer(
+	void * padFlag,
+	int nKey1, const void *pKey1,
+	int nKey2, const void *pKey2
+)
+{
+	padFlag;
+	int s1, s2, n1, n2;
+	s1 = s2 = 0;
+	n1 = n2 = -1;
+	while(n1 == n2)
+	{
+		n1 = get_version((const char*)pKey1, &s1, nKey1);
+		n2 = get_version((const char*)pKey2, &s2, nKey2);
+	}
+	return n1 - n2;
+}
+*/
 
 CVStat::CVStat(QObject *parent)
 	: QObject(parent)
@@ -34,6 +69,12 @@ bool CVStat::open( const QString & path /*= ":/statcvs.db3"*/ )
 	m_db.setDatabaseName(path);
 	if (m_db.open())
 	{
+		/*
+		sqlite3 * h = m_db.driver()->handle().value<sqlite3*>();
+		sqlite3_create_collation(h, "DOTVERSION", SQLITE_UTF8, NULL, dotversion_comparer);
+		*/
+
+
 		QSqlQuery query(m_db);
 		return query.exec(
 			"CREATE TABLE IF NOT EXISTS _config(cid INTEGER PRIMARY KEY, cvsroot TEXT, tname TEXT, lastupdate INTEGER);");
@@ -167,7 +208,7 @@ void CVStat::importLog( const QString & cvsroot, const QString & logfile )
 		"	rname TEXT,"
 		"	rdate TEXT,"
 		"	rauthor TEXT,"
-		"	rrevision TEXT,"
+		"	rrevision TEXT," //  COLLATE DOTVERSION
 		"	radd TEXT,"
 		"	rdel TEXT,"
 		"	rmsg TEXT)").arg(tableName);
