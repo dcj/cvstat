@@ -7,44 +7,44 @@
     <x>0</x>
     <y>0</y>
     <width>301</width>
-    <height>100</height>
+    <height>78</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Importing...</string>
   </property>
-  <widget class="QProgressBar" name="importProgress">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>320</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
-   <property name="format">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>281</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>the import will be time consuming when the dest folder is big, please waitting </string>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>the import will be time consuming when the dest folder is big, please waitting </string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="importProgress">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="format">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

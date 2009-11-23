@@ -143,6 +143,11 @@ void MainFrame::OnUpdateStat(bool /*checked*/)
 
 void MainFrame::OnRemoveStat(bool /*checked*/)
 {
+	if (QMessageBox::question(this, tr("confirm"),
+							 tr("is the selected cvs stat should be removed?"),
+							 QMessageBox::Yes, QMessageBox::No) == QMessageBox::No)
+		return;
+
 	QString cvsroot;
 	if (checkCurrentCvsRoot(cvsroot))
 	{

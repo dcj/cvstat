@@ -15,6 +15,11 @@ public:
 	QueryReportDialog(const QString & cvsroot, CVStat & stat, QWidget *parent = 0);
     ~QueryReportDialog();
 
+public slots:
+	void todayClicked();
+	void thisWeekClicked();
+	void thisMonthClicked();
+	void browseSaveToClicked();
 
 protected:
     void changeEvent(QEvent *e);

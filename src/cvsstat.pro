@@ -27,5 +27,7 @@ SOURCES += cvstat.cpp \
     queryextoolsdialog.cpp \
     sqlhighlighter.cpp \
     queryreportdialog.cpp
+#LIBS += -lsqlite3
 RESOURCES += mainframe.qrc
 QT += sql xml
+TRANSLATIONS=zh_cn.ts

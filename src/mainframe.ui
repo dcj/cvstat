@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -58,9 +58,19 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_New_Stat"/>
+   <addaction name="action_Update_Stat"/>
+   <addaction name="action_Remove_Stat"/>
+   <addaction name="action_View"/>
+   <addaction name="action_Query"/>
+   <addaction name="action_Report"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_New_Stat">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/new.png</normaloff>:/images/new.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;New Stat...</string>
    </property>
@@ -72,6 +82,10 @@
    </property>
   </action>
   <action name="action_Query">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/query.png</normaloff>:/images/query.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Query</string>
    </property>
@@ -80,11 +94,19 @@
    </property>
   </action>
   <action name="action_Update_Stat">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/refresh.png</normaloff>:/images/refresh.png</iconset>
+   </property>
    <property name="text">
     <string>Update Stat</string>
    </property>
   </action>
   <action name="action_Remove_Stat">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Remove Stat</string>
    </property>
@@ -101,6 +123,10 @@
    </property>
   </action>
   <action name="action_View">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/edit.png</normaloff>:/images/edit.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;View</string>
    </property>
@@ -114,12 +140,18 @@
    </property>
   </action>
   <action name="action_Report">
+   <property name="icon">
+    <iconset resource="mainframe.qrc">
+     <normaloff>:/images/report.png</normaloff>:/images/report.png</iconset>
+   </property>
    <property name="text">
     <string>Report...</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="mainframe.qrc"/>
+ </resources>
  <connections/>
 </ui>
